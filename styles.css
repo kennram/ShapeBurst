@@ -1,0 +1,297 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #0a0a2e;
+    font-family: 'Orbitron', sans-serif;
+}
+
+canvas {
+    display: block;
+}
+
+#tutorial-screen, #start-screen, #game-over, #main-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+}
+
+#tutorial-screen h1, #start-screen h1, #game-over h1, #main-menu h2 {
+    margin: 0 0 20px;
+    font-size: 48px;
+}
+
+#start-game, #theme-select, #play-pause, #submit-score, #clear-leaderboard, #restart, #close-tutorial, #pause-game, #close-menu {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s, outline 0.2s;
+    margin: 10px;
+    min-width: 80px;
+}
+
+/* Accessibility: Add focus styles */
+#start-game:focus, #theme-select:focus, #play-pause:focus, #submit-score:focus, #clear-leaderboard:focus, #restart:focus, #close-tutorial:focus, #pause-game:focus, #close-menu:focus, #menu-theme-select:focus, #volume-control:focus, #music-toggle:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+#start-game:hover, #theme-select:hover, #play-pause:hover, #submit-score:hover, #clear-leaderboard:hover, #restart:hover, #close-tutorial:hover, #pause-game:hover, #close-menu:hover {
+    filter: brightness(1.2);
+}
+
+.hidden {
+    display: none;
+}
+
+#game-ui {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 20px;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+}
+
+#game-ui.glow {
+    animation: glow 1s infinite;
+    will-change: box-shadow;
+}
+
+.ui-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.ui-item:hover {
+    transform: scale(1.1);
+}
+
+.label {
+    font-size: 14px;
+    color: #fff;
+}
+
+#center-objective {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 36px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 40px;
+    border-radius: 10px;
+    animation: flash 0.5s 4 alternate;
+    will-change: opacity;
+}
+
+#music-player {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 50px;
+    border: 2px solid var(--glow-color);
+}
+
+#visualizer {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    animation: rotate 4s linear infinite paused;
+    will-change: transform;
+}
+
+#visualizer.playing {
+    animation-play-state: running;
+}
+
+#player-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#play-pause {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    padding: 0;
+}
+
+#play-pause.pause::before {
+    content: '❚❚';
+}
+
+#track-info {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+#track-art {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#track-select {
+    padding: 5px;
+    background: #6b7280;
+    color: white;
+    border-radius: 5px;
+}
+
+#leaderboard {
+    margin: 20px 0;
+}
+
+#leaderboard h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+}
+
+#leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+}
+
+#leaderboard-list li {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #fff;
+}
+
+#player-name {
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    min-width: 150px;
+}
+
+#player-name:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+.score-popup {
+    position: absolute;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    pointer-events: none;
+    transition: all 1s ease-out;
+    will-change: transform, opacity;
+}
+
+/* New Menu Styles */
+#menu-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    font-size: 24px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#menu-toggle:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+#menu-toggle:hover {
+    filter: brightness(1.2);
+}
+
+#main-menu {
+    z-index: 1000;
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#main-menu label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+#main-menu select, #main-menu input[type="range"], #main-menu input[type="checkbox"] {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+    #game-ui {
+        font-size: 16px;
+        gap: 20px;
+        padding: 10px 15px;
+    }
+    #music-player {
+        bottom: 15px;
+        padding: 10px;
+    }
+    #start-screen, #game-over, #tutorial-screen, #main-menu {
+        padding: 30px;
+    }
+    #start-screen h1, #game-over h1, #tutorial-screen h1, #main-menu h2 {
+        font-size: 36px;
+    }
+    #menu-toggle {
+        top: 5px;
+        right: 5px;
+        padding: 8px;
+        font-size: 20px;
+    }
+    #main-menu {
+        width: 250px;
+    }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 20px var(--glow-color); }
+    50% { box-shadow: 0 0 40px var(--glow-color); }
+    100% { box-shadow: 0 0 20px var(--glow-color); }
+}
+
+@keyframes flash {
+    from { opacity: 1; }
+    to { opacity: 0.7; }
+}
